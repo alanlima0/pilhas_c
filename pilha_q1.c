@@ -1,0 +1,62 @@
+/* questão 6.1.1 Suponha que, diferentemente da convenção adotada no texto, a parte do vetor
+ ocupada pela pilha é p[0..t]. Escreva o comando que remove um elemento da pilha.
+ Escreva o comando que insere um objeto na pilha*/
+
+#include <stdio.h>
+#include <stdbool.h>
+
+#define MAX 5  
+
+int p[MAX];  // Vetor que armazena a pilha
+int t = -1;  // topo da pilha inicializado como -1 (pilha vazia)
+
+
+bool pilha_vazia() {
+    return t == -1;
+}
+
+bool pilha_cheia() {
+    return t == MAX - 1;
+}
+
+void empilhar(int y) {
+    if (pilha_cheia()) {
+        printf("Erro: Pilha cheia!\n");
+    } else {
+        p[++t] = y;
+        printf("Elemento %d empilhado\n", y);
+    }
+}
+
+int desempilhar() {
+    if (pilha_vazia()) {
+        printf("Erro: Pilha vazia!\n");
+        return -1;  
+    } else {
+        return p[t--];
+    }
+}
+
+
+int consultar_topo() {
+    if (pilha_vazia()) {
+        printf("Erro: Pilha vazia!\n");
+        return -1;
+    } else {
+        return p[t];
+    }
+}
+
+int main() {
+    empilhar(10);
+    empilhar(20);
+    empilhar(30);
+    
+    printf("Elemento no topo: %d\n", consultar_topo());
+    
+    printf("Elemento desempilhado: %d\n", desempilhar());
+    
+    printf("Elemento no topo: %d\n", consultar_topo());
+
+    return 0;
+}
